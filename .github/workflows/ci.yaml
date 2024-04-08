@@ -46,5 +46,15 @@ jobs:
 
       - name: Run tests
         uses: actions-rs/cargo@v1
+        env:
+          IS_DEV: false
+          HOST: localhost
+          PORT: 8080
+          CDN_SERVER_URL: https://cdn.storiny.com
+          RPC_SERVER_URL: 127.0.0.1:50051
+          RPC_SECRET_TOKEN: x
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+          SENTRY_DSN: x
         with:
           command: test
