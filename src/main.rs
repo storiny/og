@@ -34,7 +34,6 @@ use storiny_og::{
 };
 use tokio::sync::Mutex;
 use tonic::{
-    codec::CompressionEncoding,
     metadata::MetadataValue,
     transport::Channel,
 };
@@ -152,8 +151,10 @@ fn main() -> io::Result<()> {
                             Ok(req)
                         }),
                     )
-                    .send_compressed(CompressionEncoding::Gzip)
-                    .accept_compressed(CompressionEncoding::Gzip);
+                    // TODO: Uncomment once the server supports gzip.
+                    // .send_compressed(CompressionEncoding::Gzip)
+                    // .accept_compressed(CompressionEncoding::Gzip)
+                    ;
 
                 let app_state = web::Data::new(AppState {
                     config: get_app_config().unwrap(),
