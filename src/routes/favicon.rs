@@ -1,5 +1,9 @@
 use crate::error::AppError;
-use actix_web::{get, web, HttpResponse};
+use actix_web::{
+    get,
+    web,
+    HttpResponse,
+};
 use tracing::error;
 
 const FAVICON: &[u8] = include_bytes!("../../static/favicon.ico");

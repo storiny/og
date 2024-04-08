@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="1200" height="630" fill="#FAFAFA"/>
+    <!-- Footer -->
+    <rect width="1200" height="150" transform="translate(0 480)" fill="#36383B"/>
+    <!-- Story count -->
+    <path d="M64 526H68.5C68.8978 526 69.2794 526.158 69.5607 526.439C69.842 526.721 70 527.102 70 527.5V544C70 544.796 69.6839 545.559 69.1213 546.121C68.5587 546.684 67.7956 547 67 547M64 526V544M64 526V524.5M67 547C66.2044 547 65.4413 546.684 64.8787 546.121C64.3161 545.559 64 544.796 64 544M67 547H50.5C49.3065 547 48.1619 546.526 47.318 545.682C46.4741 544.838 46 543.693 46 542.5V524.5C46 524.102 46.158 523.721 46.4393 523.439C46.7206 523.158 47.1022 523 47.5 523H62.5C62.8978 523 63.2794 523.158 63.5607 523.439C63.842 523.721 64 524.102 64 524.5M64 544V524.5M52 529H58M52 535H58M52 541H58"
+          stroke="#B3B3B3" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+    <text fill="#FAFAFA" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="32"
+          font-weight="bold" letter-spacing="0px"><tspan x="86" y="547.32"><%= story_count %></tspan></text>
+    <text fill="#B3B3B3" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="28"
+          font-weight="500" letter-spacing="0px"><tspan x="40" y="588.28">Stories</tspan></text>
+    <!-- Follower count -->
+    <path d="M212.5 548.5V545.5C212.5 543.909 213.132 542.383 214.257 541.257C215.383 540.132 216.909 539.5 218.5 539.5H224.5C226.091 539.5 227.617 540.132 228.743 541.257C229.868 542.383 230.5 543.909 230.5 545.5V548.5M232 521.695C233.291 522.025 234.435 522.776 235.251 523.828C236.068 524.881 236.512 526.175 236.512 527.508C236.512 528.84 236.068 530.134 235.251 531.187C234.435 532.239 233.291 532.99 232 533.32M239.5 548.5V545.5C239.492 544.176 239.047 542.891 238.233 541.847C237.419 540.802 236.282 540.056 235 539.725M227.5 527.5C227.5 530.814 224.814 533.5 221.5 533.5C218.186 533.5 215.5 530.814 215.5 527.5C215.5 524.186 218.186 521.5 221.5 521.5C224.814 521.5 227.5 524.186 227.5 527.5Z"
+          stroke="#B3B3B3" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+    <text fill="#FAFAFA" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="32"
+          font-weight="bold" letter-spacing="0px"><tspan x="254" y="547.32"><%= follower_count %></tspan></text>
+    <text fill="#B3B3B3" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="28"
+          font-weight="500" letter-spacing="0px"><tspan x="208" y="588.28">Followers</tspan></text>
+    <!-- Logo -->
+    <path d="M1137.98 532.636C1134.81 527.136 1127.77 525.251 1122.27 528.427C1116.77 531.602 1114.89 538.636 1118.06 544.136C1120.71 548.723 1126.04 550.795 1130.93 549.516L1138.99 563.48C1136.94 565.557 1135.68 568.411 1135.68 571.56C1135.68 577.911 1140.82 583.06 1147.18 583.06C1153.53 583.06 1158.68 577.911 1158.68 571.56C1158.68 565.208 1153.53 560.06 1147.18 560.06C1146.17 560.06 1145.2 560.189 1144.27 560.431L1136.21 546.47C1139.76 542.877 1140.63 537.223 1137.98 532.636Z"
+          fill="#FCFCFC"/>
+    <path d="M1108.82 583.116C1115.18 583.116 1120.32 577.967 1120.32 571.616C1120.32 565.265 1115.18 560.116 1108.82 560.116C1102.47 560.116 1097.32 565.265 1097.32 571.616C1097.32 577.967 1102.47 583.116 1108.82 583.116Z"
+          fill="#FCFCFC"/>
+    <!-- Name -->
+    <text x="50%" y="42%" dominant-baseline="middle" text-anchor="middle" xml:space="preserve" style="white-space: pre"
+          font-family="Cabinet Grotesk"
+          font-size="112" font-weight="800" letter-spacing="-0.05px"
+    ><tspan fill="#8c8c8c">#</tspan><tspan fill="#1a1a1a"><%= name %></tspan></text>
+</svg>

@@ -1,5 +1,10 @@
 use crate::error::AppError;
-use actix_web::{get, http::header::ContentType, web, HttpResponse};
+use actix_web::{
+    get,
+    http::header::ContentType,
+    web,
+    HttpResponse,
+};
 
 const ROBOTS_TXT: &str = include_str!("../../static/robots.txt");
 

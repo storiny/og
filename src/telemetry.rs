@@ -1,7 +1,18 @@
 use actix_web::rt::task::JoinHandle;
-use tracing::{subscriber::set_global_default, Subscriber};
-use tracing_bunyan_formatter::{BunyanFormattingLayer, JsonStorageLayer};
-use tracing_subscriber::{fmt::MakeWriter, layer::SubscriberExt, EnvFilter, Registry};
+use tracing::{
+    subscriber::set_global_default,
+    Subscriber,
+};
+use tracing_bunyan_formatter::{
+    BunyanFormattingLayer,
+    JsonStorageLayer,
+};
+use tracing_subscriber::{
+    fmt::MakeWriter,
+    layer::SubscriberExt,
+    EnvFilter,
+    Registry,
+};
 
 /// Composes multiple layers into a tracing's subscriber.
 ///

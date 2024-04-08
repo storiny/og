@@ -12,6 +12,10 @@ pub struct Config {
     pub port: String,
     /// Public URL of the CDN server
     pub cdn_server_url: String,
+    /// Private URL of the RPC server
+    pub rpc_server_url: String,
+    /// Private RPC authentication token
+    pub rpc_secret_token: String,
     /// Redis host
     pub redis_host: String,
     /// Redis port

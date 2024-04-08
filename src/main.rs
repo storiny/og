@@ -1,19 +1,49 @@
 use actix_cors::Cors;
-use actix_extensible_rate_limit::{backend::SimpleInputFunctionBuilder, RateLimiter};
+use actix_extensible_rate_limit::{
+    backend::SimpleInputFunctionBuilder,
+    RateLimiter,
+};
 use actix_http::Method;
-use actix_web::{http::header::ContentType, web, App, HttpResponse, HttpServer, Responder};
+use actix_web::{
+    http::header::ContentType,
+    web,
+    App,
+    HttpResponse,
+    HttpServer,
+    Responder,
+};
 use dotenv::dotenv;
 use redis::aio::ConnectionManager;
-use std::{io, sync::Arc, time::Duration};
+use std::{
+    io,
+    sync::Arc,
+    time::Duration,
+};
 use storiny_og::{
     config::get_app_config,
     constants::redis_namespaces::RedisNamespace,
+    grpc::defs::grpc_service::v1::api_service_client::ApiServiceClient,
     routes,
-    telemetry::{get_subscriber, init_subscriber},
+    telemetry::{
+        get_subscriber,
+        init_subscriber,
+    },
+    AppState,
+    AuthInterceptor,
+    GrpcClient,
+};
+use tokio::sync::Mutex;
+use tonic::{
+    codec::CompressionEncoding,
+    metadata::MetadataValue,
+    transport::Channel,
 };
 use tracing::error;
 use tracing_actix_web::TracingLogger;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::{
+    layer::SubscriberExt,
+    util::SubscriberInitExt,
+};
 
 mod middlewares;
 
@@ -92,7 +122,43 @@ fn main() -> io::Result<()> {
                         .key_prefix(Some(&format!("{}:", RedisNamespace::RateLimit)))
                         .build();
 
-                let web_config = web::Data::new(config.clone());
+                // gRPC client
+                let grpc_channel = match Channel::from_shared(config.rpc_server_url.to_string())
+                    .expect("unable to resolve the rpc server endpoint")
+                    .connect()
+                    .await
+                {
+                    Ok(channel) => {
+                        println!("Connected to the rpc service");
+                        channel
+                    }
+                    Err(err) => {
+                        error!("unable to connect to the rpc service: {err:?}");
+                        std::process::exit(1);
+                    }
+                };
+
+                let auth_token: MetadataValue<_> = format!("Bearer {}", config.rpc_secret_token)
+                    .parse()
+                    .expect("unable to parse the rpc auth token");
+
+                let grpc_client: GrpcClient =
+                    ApiServiceClient::with_interceptor::<AuthInterceptor>(
+                        grpc_channel,
+                        Box::new(move |mut req: tonic::Request<()>| {
+                            req.metadata_mut()
+                                .insert("authorization", auth_token.clone());
+
+                            Ok(req)
+                        }),
+                    )
+                    .send_compressed(CompressionEncoding::Gzip)
+                    .accept_compressed(CompressionEncoding::Gzip);
+
+                let app_state = web::Data::new(AppState {
+                    config: get_app_config().unwrap(),
+                    grpc_client: Mutex::new(grpc_client),
+                });
 
                 HttpServer::new(move || {
                     let input = SimpleInputFunctionBuilder::new(Duration::from_secs(5), 25) // 25 requests / 5s
@@ -122,7 +188,7 @@ fn main() -> io::Result<()> {
                         .wrap(TracingLogger::default())
                         .wrap(actix_web::middleware::Compress::default())
                         .wrap(actix_web::middleware::NormalizePath::trim())
-                        .app_data(web_config.clone())
+                        .app_data(app_state.clone())
                         .configure(routes::init_routes)
                         .default_service(web::route().to(not_found))
                 })

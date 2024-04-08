@@ -1,0 +1,64 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <pattern id="avatar" patternContentUnits="objectBoundingBox" width="1" height="1">
+            <use xlink:href="#avatar_img" transform="scale(0.00125)"/>
+        </pattern>
+        <image id="avatar_img" width="800" height="800" xlink:href="<%= user_avatar_url %>"
+               preserveAspectRatio="xMidYMid slice"/>
+        <% if let Some(ref splash_url) = splash_url { %>
+            <pattern id="splash" patternContentUnits="objectBoundingBox" width="1" height="1">
+                <use xlink:href="#splash_img" transform="matrix(0.000390625 0 0 0.000694444 0 -0.388889)"/>
+            </pattern>
+            <image id="splash_img" width="2560" height="2560" xlink:href="<%= splash_url %>"/>
+        <% } %>
+    </defs>
+    <!-- Background -->
+    <rect width="1200" height="630" fill="#FAFAFA"/>
+    <!-- Splash image -->
+    <% if splash_url.is_some() { %>
+        <rect x="700" y="292" width="572.756" height="322.175" rx="4.77296" transform="rotate(-10 700 292)"
+              fill="url(#splash)"/>
+    <% } %>
+    <rect width="1200" height="150" transform="translate(0 480)" fill="#36383B"/>
+    <!-- Read count -->
+    <path d="M58 545.5C55.9477 544.315 53.6197 543.691 51.25 543.691C48.8803 543.691 46.5523 544.315 44.5 545.5V526C46.5523 524.815 48.8803 524.191 51.25 524.191C53.6197 524.191 55.9477 524.815 58 526M58 545.5C60.0523 544.315 62.3803 543.691 64.75 543.691C67.1197 543.691 69.4477 544.315 71.5 545.5V526C69.4477 524.815 67.1197 524.191 64.75 524.191C62.3803 524.191 60.0523 524.815 58 526M58 545.5V526"
+          stroke="#B3B3B3" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+    <text fill="#FAFAFA" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="32"
+          font-weight="500" letter-spacing="0px"><tspan x="86" y="547.32"><%= read_count %></tspan></text>
+    <text fill="#B3B3B3" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="28"
+          font-weight="500" letter-spacing="0px"><tspan x="40" y="588.28">Reads</tspan></text>
+    <!-- Like count -->
+    <path d="M251.257 535.868L240.012 547.005L228.768 535.868C228.027 535.147 227.442 534.279 227.053 533.321C226.663 532.362 226.475 531.333 226.503 530.299C226.53 529.264 226.771 528.247 227.211 527.31C227.651 526.373 228.28 525.538 229.058 524.856C229.837 524.174 230.748 523.661 231.735 523.349C232.722 523.037 233.762 522.933 234.791 523.042C235.82 523.152 236.815 523.474 237.714 523.987C238.613 524.5 239.395 525.194 240.012 526.025C240.632 525.2 241.416 524.512 242.314 524.004C243.212 523.497 244.205 523.18 245.231 523.073C246.257 522.967 247.294 523.074 248.277 523.386C249.26 523.699 250.168 524.212 250.944 524.892C251.72 525.572 252.347 526.404 252.787 527.338C253.226 528.271 253.468 529.285 253.497 530.316C253.526 531.348 253.342 532.374 252.957 533.331C252.571 534.288 251.993 535.155 251.257 535.877"
+          stroke="#B3B3B3" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+    <text fill="#FAFAFA" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="32"
+          font-weight="500" letter-spacing="0px"><tspan x="268" y="547.32"><%= like_count %></tspan></text>
+    <text fill="#B3B3B3" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="28"
+          font-weight="500" letter-spacing="0px"><tspan x="222" y="588.28">Likes</tspan></text>
+    <!-- Comment count -->
+    <path d="M382.5 547L384.45 541.15C382.765 538.658 382.155 535.706 382.734 532.844C383.314 529.982 385.043 527.404 387.6 525.59C390.157 523.776 393.368 522.849 396.636 522.981C399.904 523.114 403.007 524.297 405.368 526.31C407.729 528.324 409.186 531.031 409.47 533.928C409.754 536.825 408.844 539.715 406.911 542.061C404.977 544.407 402.151 546.049 398.958 546.681C395.764 547.314 392.421 546.894 389.55 545.5L382.5 547Z"
+          stroke="#B3B3B3" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
+    <text fill="#FAFAFA" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="32"
+          font-weight="500" letter-spacing="0px"><tspan x="424" y="547.32"><%= comment_count %></tspan></text>
+    <text fill="#B3B3B3" xml:space="preserve" style="white-space: pre" font-family="Satoshi" font-size="28"
+          font-weight="500" letter-spacing="0px"><tspan x="378" y="588.28">Comments</tspan></text>
+    <!-- Logo -->
+    <path d="M1137.98 532.636C1134.81 527.136 1127.77 525.251 1122.27 528.427C1116.77 531.602 1114.89 538.636 1118.06 544.136C1120.71 548.723 1126.04 550.795 1130.93 549.516L1138.99 563.48C1136.94 565.557 1135.68 568.411 1135.68 571.56C1135.68 577.911 1140.82 583.06 1147.18 583.06C1153.53 583.06 1158.68 577.911 1158.68 571.56C1158.68 565.208 1153.53 560.06 1147.18 560.06C1146.17 560.06 1145.2 560.189 1144.27 560.431L1136.21 546.47C1139.76 542.877 1140.63 537.223 1137.98 532.636Z"
+          fill="#FCFCFC"/>
+    <path d="M1108.82 583.116C1115.18 583.116 1120.32 577.967 1120.32 571.616C1120.32 565.265 1115.18 560.116 1108.82 560.116C1102.47 560.116 1097.32 565.265 1097.32 571.616C1097.32 577.967 1102.47 583.116 1108.82 583.116Z"
+          fill="#FCFCFC"/>
+    <!-- Title -->
+    <text fill="#1A1A1A" xml:space="preserve" style="white-space: pre" font-family="Cabinet Grotesk"
+          font-size="46" font-weight="800" letter-spacing="-0.05px"><%- title %></text>
+    <!-- User persona -->
+    <rect x="40" y="184" transform="translate(0 <%= title_offset %>)" width="59.5833" height="59.5833" rx="29.7916"
+          fill="url(#avatar)"/>
+    <text fill="#1A1A1A" transform="translate(0 <%= title_offset %>)" xml:space="preserve" style="white-space: pre"
+          font-family="Satoshi" font-size="32"
+          font-weight="500" letter-spacing="0px"><tspan x="118.203" y="226.112"><%= user_name %></tspan></text>
+    <!-- Description -->
+    <% if let Some(description) = description { %>
+        <text fill="#6B6B6B" transform="translate(0 <%= title_offset %>)" xml:space="preserve" style="white-space: pre"
+              font-family="Satoshi" font-size="30" letter-spacing="0px"><%- description %></text>
+    <% } %>
+</svg>

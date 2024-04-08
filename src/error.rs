@@ -1,14 +1,23 @@
 use actix_http::StatusCode;
-use actix_web::{HttpResponse, ResponseError};
-use std::fmt::{Display, Formatter};
+use actix_web::{
+    HttpResponse,
+    ResponseError,
+};
+use std::fmt::{
+    Display,
+    Formatter,
+};
+use tonic::Code;
 
 /// The application error type.
 #[derive(Debug)]
 pub enum AppError {
-    /// The [serde_json::Error] variant.
-    SerdeError(serde_json::Error),
-    /// The [reqwest::Error] variant.
-    ReqwestError(reqwest::Error),
+    /// The [png::EncodingError] variant.
+    PngEncodingError(png::EncodingError),
+    /// The [sailfish::RenderError] variant.
+    RenderTemplateError(sailfish::RenderError),
+    /// The [tonic::Status] variant.
+    TonicError(tonic::Status),
     /// Internal server error. The string value of this variant is not sent to the client.
     InternalError(String),
     /// The error raised due to bad data sent by the client. The first element of the tuple is the
@@ -22,15 +31,21 @@ pub enum AppError {
     ClientError(StatusCode, String),
 }
 
-impl From<serde_json::Error> for AppError {
-    fn from(error: serde_json::Error) -> Self {
-        AppError::SerdeError(error)
+impl From<png::EncodingError> for AppError {
+    fn from(error: png::EncodingError) -> Self {
+        AppError::PngEncodingError(error)
     }
 }
 
-impl From<reqwest::Error> for AppError {
-    fn from(error: reqwest::Error) -> Self {
-        AppError::ReqwestError(error)
+impl From<sailfish::RenderError> for AppError {
+    fn from(error: sailfish::RenderError) -> Self {
+        AppError::RenderTemplateError(error)
+    }
+}
+
+impl From<tonic::Status> for AppError {
+    fn from(error: tonic::Status) -> Self {
+        AppError::TonicError(error)
     }
 }
 
@@ -44,9 +59,13 @@ impl ResponseError for AppError {
     /// Returns the HTTP [StatusCode] for the error.
     fn status_code(&self) -> StatusCode {
         match self {
-            AppError::InternalError(_) | AppError::SerdeError(_) | AppError::ReqwestError(_) => {
-                StatusCode::INTERNAL_SERVER_ERROR
-            }
+            AppError::InternalError(_)
+            | AppError::PngEncodingError(_)
+            | AppError::RenderTemplateError(_) => StatusCode::INTERNAL_SERVER_ERROR,
+            AppError::TonicError(status) => match status.code() {
+                Code::NotFound => StatusCode::NOT_FOUND,
+                _ => StatusCode::INTERNAL_SERVER_ERROR,
+            },
             AppError::ClientError(status_code, _) => *status_code,
         }
     }
@@ -56,9 +75,13 @@ impl ResponseError for AppError {
         let mut response_builder = HttpResponse::build(self.status_code());
 
         match self {
-            AppError::InternalError(_) | AppError::SerdeError(_) | AppError::ReqwestError(_) => {
-                response_builder.body("Internal server error")
-            }
+            AppError::InternalError(_)
+            | AppError::PngEncodingError(_)
+            | AppError::RenderTemplateError(_) => response_builder.body("Internal server error"),
+            AppError::TonicError(status) => match status.code() {
+                Code::NotFound => response_builder.body("Entity not found"),
+                _ => response_builder.body("Internal gateway error"),
+            },
             AppError::ClientError(_, message) => response_builder.body(message.to_string()),
         }
     }

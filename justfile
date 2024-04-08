@@ -13,14 +13,5 @@ build_img:
 fmt:
     cargo +nightly fmt
 
-test:
-    cargo nextest run --workspace
-
-test_ci:
-    cargo nextest run --no-fail-fast --workspace
-
-test_verbose:
-    cargo nextest run --no-capture --no-fail-fast --workspace
-
 udeps:
     cargo +nightly udeps --all-targets

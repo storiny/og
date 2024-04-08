@@ -1,5 +1,9 @@
 use crate::error::AppError;
-use actix_web::{get, web, HttpResponse};
+use actix_web::{
+    get,
+    web,
+    HttpResponse,
+};
 
 #[get("/health")]
 #[tracing::instrument(name = "GET /health", skip_all, err)]
