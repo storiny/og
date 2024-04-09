@@ -1,1 +1,1 @@
-Dynamic open graph metadata images.
+Source for Storiny's open graph service.
