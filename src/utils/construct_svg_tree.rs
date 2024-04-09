@@ -40,7 +40,15 @@ lazy_static! {
     //
     static ref FONT_DB: fontdb::Database = {
         let mut font_db = fontdb::Database::new();
-        font_db.load_fonts_dir("fonts");
+
+        font_db.load_font_data(include_bytes!("../../fonts/CabinetGrotesk/CabinetGrotesk-Regular.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/CabinetGrotesk/CabinetGrotesk-Medium.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/CabinetGrotesk/CabinetGrotesk-Bold.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/CabinetGrotesk/CabinetGrotesk-Extrabold.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/Satoshi/Satoshi-Regular.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/Satoshi/Satoshi-Medium.ttf").to_vec());
+        font_db.load_font_data(include_bytes!("../../fonts/Satoshi/Satoshi-Bold.ttf").to_vec());
+
         font_db
     };
 }
