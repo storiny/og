@@ -123,6 +123,7 @@ async fn generate_story_open_graph_image(
     let comment_count = abbrev_num(response.comment_count as isize, None).unwrap_or_default();
 
     let mut title_offset = "0";
+    let mut max_description_lines = 3;
 
     let title = {
         let title_lines = wrap_text(&process_text(&response.title), 920, Some(2), |text| {
@@ -131,6 +132,7 @@ async fn generate_story_open_graph_image(
 
         if title_lines.len() == 1 {
             title_offset = "-60";
+            max_description_lines = 4;
         }
 
         title_lines
@@ -155,7 +157,7 @@ async fn generate_story_open_graph_image(
         wrap_text(
             &process_text(value.as_str()),
             if splash_url.is_some() { 430 } else { 760 },
-            Some(3),
+            Some(max_description_lines),
             |text| get_text_width(&SATOSHI_REGULAR, 30.0, text) as usize,
         )
         .iter()
