@@ -14,7 +14,7 @@ where
     let mut text = text.to_owned();
     let text_width = compute_text_width(&text);
     let text_chars = text.graphemes(true).count().max(1); // Total number of characters.
-    let char_width = text_width / text_chars; // Average width of each character in pixels.
+    let char_width = (text_width / text_chars).max(1); // Average width of each character in pixels.
     // Maximum number of characters that can fit inside the given `max_width` value.
     let mut fitting_chars = ((max_width / char_width as u32) as f32).floor() as usize;
 

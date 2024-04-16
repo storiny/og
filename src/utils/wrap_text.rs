@@ -19,8 +19,8 @@ where
     F: Fn(&str) -> usize,
 {
     let text_width = compute_text_width(text);
-    let text_chars = text.graphemes(true).count();
-    let char_width = text_width / text_chars.max(1); // Average width of each character in pixels.
+    let text_chars = text.graphemes(true).count().max(1);
+    let char_width = (text_width / text_chars).max(1); // Average width of each character in pixels.
     let columns = max_width / char_width as u32;
     let lines = wrap(text, columns as usize);
 
