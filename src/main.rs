@@ -1,16 +1,17 @@
 use actix_cors::Cors;
 use actix_extensible_rate_limit::{
-    backend::SimpleInputFunctionBuilder,
     RateLimiter,
+    backend::SimpleInputFunctionBuilder,
 };
+use actix_files as fs;
 use actix_http::Method;
 use actix_web::{
-    http::header::ContentType,
-    web,
     App,
     HttpResponse,
     HttpServer,
     Responder,
+    http::header::ContentType,
+    web,
 };
 use dotenv::dotenv;
 use redis::aio::ConnectionManager;
@@ -20,6 +21,9 @@ use std::{
     time::Duration,
 };
 use storiny_og::{
+    AppState,
+    AuthInterceptor,
+    GrpcClient,
     config::get_app_config,
     constants::redis_namespaces::RedisNamespace,
     grpc::defs::grpc_service::v1::api_service_client::ApiServiceClient,
@@ -28,9 +32,6 @@ use storiny_og::{
         get_subscriber,
         init_subscriber,
     },
-    AppState,
-    AuthInterceptor,
-    GrpcClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -190,6 +191,13 @@ fn main() -> io::Result<()> {
                         .wrap(actix_web::middleware::NormalizePath::trim())
                         .app_data(app_state.clone())
                         .configure(routes::init_routes)
+                        // This service must be registered at last due to the `mount_path` being
+                        // `/`.
+                        .service(
+                            fs::Files::new("/", "./static")
+                                .use_etag(true)
+                                .use_last_modified(true),
+                        )
                         .default_service(web::route().to(not_found))
                 })
                 .bind((host, port))?

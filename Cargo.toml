@@ -24,7 +24,6 @@ prost = "0.12.4"
 redis = { version = "0.25.3", features = ["tokio-comp", "aio", "connection-manager"] }
 reqwest = { version = "0.12.3", features = ["blocking"] }
 resvg = "0.41.0"
-rust_decimal = "1.35.0"
 rusttype = "0.9.3"
 sailfish = "0.8.3"
 sentry = { version = "0.32.0", features = ["tracing"] }
@@ -44,6 +43,7 @@ unidecode = "0.3.0"
 usvg = "0.41.0"
 pbjson = "0.6.0"
 async-trait = "0.1.79"
+actix-files = "0.6.6"
 
 [dev-dependencies]
 image = { version = "0.25.1", default-features = false, features = ["jpeg", "png", "rayon"] }
