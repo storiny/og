@@ -1,15 +1,15 @@
 #![forbid(unsafe_code)]
-#![allow(clippy::module_inception)]
+#![allow(clippy::module_inception, clippy::needless_lifetimes)]
 #![deny(clippy::expect_used, clippy::unwrap_used)]
 
 use crate::grpc::defs::grpc_service::v1::api_service_client::ApiServiceClient;
 use sailfish::TemplateOnce;
 use tokio::sync::Mutex;
 use tonic::{
-    codegen::InterceptedService,
-    transport::Channel,
     Request,
     Status,
+    codegen::InterceptedService,
+    transport::Channel,
 };
 
 pub mod config;

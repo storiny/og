@@ -10,7 +10,8 @@ impl serde::Serialize for GetStoryOpenGraphDataRequest {
         if !self.id.is_empty() {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("open_graph_def.v1.GetStoryOpenGraphDataRequest", len)?;
+        let mut struct_ser =
+            serializer.serialize_struct("open_graph_def.v1.GetStoryOpenGraphDataRequest", len)?;
         if !self.id.is_empty() {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -23,9 +24,7 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataRequest {
     where
         D: serde::Deserializer<'de>,
     {
-        const FIELDS: &[&str] = &[
-            "id",
-        ];
+        const FIELDS: &[&str] = &["id"];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
@@ -41,7 +40,10 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataRequest {
                 impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
                     type Value = GeneratedField;
 
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    fn expecting(
+                        &self,
+                        formatter: &mut std::fmt::Formatter<'_>,
+                    ) -> std::fmt::Result {
                         write!(formatter, "expected one of: {:?}", &FIELDS)
                     }
 
@@ -67,9 +69,12 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataRequest {
                 formatter.write_str("struct open_graph_def.v1.GetStoryOpenGraphDataRequest")
             }
 
-            fn visit_map<V>(self, mut map: V) -> std::result::Result<GetStoryOpenGraphDataRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
+            fn visit_map<V>(
+                self,
+                mut map: V,
+            ) -> std::result::Result<GetStoryOpenGraphDataRequest, V::Error>
+            where
+                V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
                 while let Some(k) = map.next_key()? {
@@ -87,7 +92,11 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("open_graph_def.v1.GetStoryOpenGraphDataRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct(
+            "open_graph_def.v1.GetStoryOpenGraphDataRequest",
+            FIELDS,
+            GeneratedVisitor,
+        )
     }
 }
 impl serde::Serialize for GetStoryOpenGraphDataResponse {
@@ -128,7 +137,8 @@ impl serde::Serialize for GetStoryOpenGraphDataResponse {
         if self.user_avatar_id.is_some() {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("open_graph_def.v1.GetStoryOpenGraphDataResponse", len)?;
+        let mut struct_ser =
+            serializer.serialize_struct("open_graph_def.v1.GetStoryOpenGraphDataResponse", len)?;
         if !self.id.is_empty() {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -211,7 +221,10 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataResponse {
                 impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
                     type Value = GeneratedField;
 
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    fn expecting(
+                        &self,
+                        formatter: &mut std::fmt::Formatter<'_>,
+                    ) -> std::fmt::Result {
                         write!(formatter, "expected one of: {:?}", &FIELDS)
                     }
 
@@ -246,9 +259,12 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataResponse {
                 formatter.write_str("struct open_graph_def.v1.GetStoryOpenGraphDataResponse")
             }
 
-            fn visit_map<V>(self, mut map: V) -> std::result::Result<GetStoryOpenGraphDataResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
+            fn visit_map<V>(
+                self,
+                mut map: V,
+            ) -> std::result::Result<GetStoryOpenGraphDataResponse, V::Error>
+            where
+                V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
                 let mut title__ = None;
@@ -290,25 +306,28 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataResponse {
                             if like_count__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("likeCount"));
                             }
-                            like_count__ = 
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            like_count__ = Some(
+                                map.next_value::<::pbjson::private::NumberDeserialize<_>>()?
+                                    .0,
+                            );
                         }
                         GeneratedField::ReadCount => {
                             if read_count__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("readCount"));
                             }
-                            read_count__ = 
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            read_count__ = Some(
+                                map.next_value::<::pbjson::private::NumberDeserialize<_>>()?
+                                    .0,
+                            );
                         }
                         GeneratedField::CommentCount => {
                             if comment_count__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("commentCount"));
                             }
-                            comment_count__ = 
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            comment_count__ = Some(
+                                map.next_value::<::pbjson::private::NumberDeserialize<_>>()?
+                                    .0,
+                            );
                         }
                         GeneratedField::IsPrivate => {
                             if is_private__.is_some() {
@@ -344,7 +363,11 @@ impl<'de> serde::Deserialize<'de> for GetStoryOpenGraphDataResponse {
                 })
             }
         }
-        deserializer.deserialize_struct("open_graph_def.v1.GetStoryOpenGraphDataResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct(
+            "open_graph_def.v1.GetStoryOpenGraphDataResponse",
+            FIELDS,
+            GeneratedVisitor,
+        )
     }
 }
 impl serde::Serialize for GetTagOpenGraphDataRequest {
@@ -358,7 +381,8 @@ impl serde::Serialize for GetTagOpenGraphDataRequest {
         if !self.id.is_empty() {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("open_graph_def.v1.GetTagOpenGraphDataRequest", len)?;
+        let mut struct_ser =
+            serializer.serialize_struct("open_graph_def.v1.GetTagOpenGraphDataRequest", len)?;
         if !self.id.is_empty() {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -371,9 +395,7 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataRequest {
     where
         D: serde::Deserializer<'de>,
     {
-        const FIELDS: &[&str] = &[
-            "id",
-        ];
+        const FIELDS: &[&str] = &["id"];
 
         #[allow(clippy::enum_variant_names)]
         enum GeneratedField {
@@ -389,7 +411,10 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataRequest {
                 impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
                     type Value = GeneratedField;
 
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    fn expecting(
+                        &self,
+                        formatter: &mut std::fmt::Formatter<'_>,
+                    ) -> std::fmt::Result {
                         write!(formatter, "expected one of: {:?}", &FIELDS)
                     }
 
@@ -415,9 +440,12 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataRequest {
                 formatter.write_str("struct open_graph_def.v1.GetTagOpenGraphDataRequest")
             }
 
-            fn visit_map<V>(self, mut map: V) -> std::result::Result<GetTagOpenGraphDataRequest, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
+            fn visit_map<V>(
+                self,
+                mut map: V,
+            ) -> std::result::Result<GetTagOpenGraphDataRequest, V::Error>
+            where
+                V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
                 while let Some(k) = map.next_key()? {
@@ -435,7 +463,11 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataRequest {
                 })
             }
         }
-        deserializer.deserialize_struct("open_graph_def.v1.GetTagOpenGraphDataRequest", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct(
+            "open_graph_def.v1.GetTagOpenGraphDataRequest",
+            FIELDS,
+            GeneratedVisitor,
+        )
     }
 }
 impl serde::Serialize for GetTagOpenGraphDataResponse {
@@ -458,7 +490,8 @@ impl serde::Serialize for GetTagOpenGraphDataResponse {
         if self.follower_count != 0 {
             len += 1;
         }
-        let mut struct_ser = serializer.serialize_struct("open_graph_def.v1.GetTagOpenGraphDataResponse", len)?;
+        let mut struct_ser =
+            serializer.serialize_struct("open_graph_def.v1.GetTagOpenGraphDataResponse", len)?;
         if !self.id.is_empty() {
             struct_ser.serialize_field("id", &self.id)?;
         }
@@ -506,7 +539,10 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataResponse {
                 impl<'de> serde::de::Visitor<'de> for GeneratedVisitor {
                     type Value = GeneratedField;
 
-                    fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                    fn expecting(
+                        &self,
+                        formatter: &mut std::fmt::Formatter<'_>,
+                    ) -> std::fmt::Result {
                         write!(formatter, "expected one of: {:?}", &FIELDS)
                     }
 
@@ -535,9 +571,12 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataResponse {
                 formatter.write_str("struct open_graph_def.v1.GetTagOpenGraphDataResponse")
             }
 
-            fn visit_map<V>(self, mut map: V) -> std::result::Result<GetTagOpenGraphDataResponse, V::Error>
-                where
-                    V: serde::de::MapAccess<'de>,
+            fn visit_map<V>(
+                self,
+                mut map: V,
+            ) -> std::result::Result<GetTagOpenGraphDataResponse, V::Error>
+            where
+                V: serde::de::MapAccess<'de>,
             {
                 let mut id__ = None;
                 let mut name__ = None;
@@ -561,17 +600,19 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataResponse {
                             if story_count__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("storyCount"));
                             }
-                            story_count__ = 
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            story_count__ = Some(
+                                map.next_value::<::pbjson::private::NumberDeserialize<_>>()?
+                                    .0,
+                            );
                         }
                         GeneratedField::FollowerCount => {
                             if follower_count__.is_some() {
                                 return Err(serde::de::Error::duplicate_field("followerCount"));
                             }
-                            follower_count__ = 
-                                Some(map.next_value::<::pbjson::private::NumberDeserialize<_>>()?.0)
-                            ;
+                            follower_count__ = Some(
+                                map.next_value::<::pbjson::private::NumberDeserialize<_>>()?
+                                    .0,
+                            );
                         }
                     }
                 }
@@ -583,6 +624,10 @@ impl<'de> serde::Deserialize<'de> for GetTagOpenGraphDataResponse {
                 })
             }
         }
-        deserializer.deserialize_struct("open_graph_def.v1.GetTagOpenGraphDataResponse", FIELDS, GeneratedVisitor)
+        deserializer.deserialize_struct(
+            "open_graph_def.v1.GetTagOpenGraphDataResponse",
+            FIELDS,
+            GeneratedVisitor,
+        )
     }
 }
