@@ -15,6 +15,7 @@ Cargo.lock
 
 # Misc
 .idea
+.DS_Store
 
 # Env files
 .env
